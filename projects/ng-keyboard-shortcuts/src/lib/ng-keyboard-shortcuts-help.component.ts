@@ -1,23 +1,25 @@
+import { animate, style, transition, trigger } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
 import {
     ApplicationRef,
     Component,
-    ComponentFactoryResolver, ElementRef, HostBinding,
+    ComponentFactoryResolver,
+    ElementRef,
     Injector,
     Input,
     OnDestroy,
     OnInit,
     TemplateRef,
     ViewChild,
-    ViewContainerRef
-} from "@angular/core";
-import { DomPortalOutlet } from "./dom-portal-outlet";
-import { TemplatePortal } from "./portal";
-import { KeyboardShortcutsService } from "./ng-keyboard-shortcuts.service";
-import { KeyboardShortcutsHelpService } from "./ng-keyboard-shortcuts-help.service";
-import { animate, style, transition, trigger } from "@angular/animations";
+    ViewContainerRef,
+} from '@angular/core';
+import { SubscriptionLike } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { groupBy } from "./utils";
-import { SubscriptionLike } from "rxjs";
+import { DomPortalOutlet } from './dom-portal-outlet';
+import { KeyboardShortcutsHelpService } from './ng-keyboard-shortcuts-help.service';
+import { KeyboardShortcutsService } from './ng-keyboard-shortcuts.service';
+import { TemplatePortal } from './portal';
+import { groupBy } from './utils';
 
 /**
  * @ignore
@@ -197,6 +199,7 @@ export class KeyboardShortcutsHelpComponent implements OnInit, OnDestroy {
      * @ignore
      */
     constructor(
+        @Inject(DOCUMENT) private document: Document,
         private componentFactoryResolver: ComponentFactoryResolver,
         private appRef: ApplicationRef,
         private keyboard: KeyboardShortcutsService,
